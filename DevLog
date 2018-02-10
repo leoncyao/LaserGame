@@ -1,0 +1,58 @@
+LaserGame Project
+
+Preliminary Structure:
+	-Starts with initial configuration of Level:
+		-Will have a tube for spawning Lasers
+		-Receiver to catch Lasers
+		-Preset blocks for bouncing
+	-waits for user to edit GameSpace by either:
+		-dragging box from itemBar onto GameSpace
+		-moving existing items in GameSpace around with mouse
+		-Blocks will be fixed to grid, and will snap to integer grid locations when being dragged (x, y) x,y being Integers.
+	-if user hits play:
+		-restrict editing
+		-spawn Laser with constant velocity
+		-start simulating according to physics laws:
+			- Lasers bounce elastically from blocks
+		-have a time variable at point? or reset time to 0?
+		-if the laser fulfills receiver requirements
+			-stop simulation
+		-if user hits stop:
+			-destroy any in game lasers
+			-reset to initial configuration excluding items that the user has edited
+	-If receiver fulfills expectation	
+		-player wins
+
+Themes to keep in mind:
+	- Test based design - design tests for methods first before you design the method itself.
+	- Make PC to mobile version easy to convert - do not rely on PC specific design
+
+Ideas for later
+	- Percent counter above receiver that shows how much laser still needs to go into the receiver
+	- receiver only catches from one side
+
+02-10:
+	- First commit initial set up to repository
+	- Work on getting basic class structures defined:
+		- Main.cs - A runner Class that has the main game loop in its update()
+		- UI.cs - Class for the UI:
+			- Will contain a Panel for holding items that can be dropped into the GameSpace
+			- Have editing objects existing on GameSpace in Main?
+			- Or have Drag-able script on Cubes as well?
+		- Block.cs - Basic block Class that will interact with lasers. 
+		- Laser.cs - Laser Class. Lasers bounce of blocks elastically
+		- Receiver.cs - Receiver class that will catch lasers
+	- Make prefabs for Laser, Block
+	- Make basic UI prefabs
+	- Create tests for bouncing lasers
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
