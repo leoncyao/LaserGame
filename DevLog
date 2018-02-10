@@ -32,19 +32,35 @@ Ideas for later
 	- receiver only catches from one side
 
 02-10:
-	- First commit initial set up to repository
-	- Work on getting basic class structures defined:
-		- Main.cs - A runner Class that has the main game loop in its update()
-		- UI.cs - Class for the UI:
-			- Will contain a Panel for holding items that can be dropped into the GameSpace
-			- Have editing objects existing on GameSpace in Main?
-			- Or have Drag-able script on Cubes as well?
-		- Block.cs - Basic block Class that will interact with lasers. 
-		- Laser.cs - Laser Class. Lasers bounce of blocks elastically
-		- Receiver.cs - Receiver class that will catch lasers
-	- Make prefabs for Laser, Block
-	- Make basic UI prefabs
-	- Create tests for bouncing lasers
+	F - First commit initial set up to repository 
+	F - Work on getting basic class structures defined:
+	F - Main.cs - A runner Class that has the main game loop in its update():
+	F - Fix ScreenLength and ScreenSize
+	F - Draw Grid for visualization
+	F - Spawning methods for block, Laser
+	F - Block.cs - Basic block Class that will interact with lasers. 
+	F - Laser.cs - Laser Class. Lasers bounce of blocks elastically
+		F - Make prefabs for Laser, Block:
+		F - Laser will be represented by a single ball
+	F - Create tests for bouncing lasers
+	F - Add timer to stop repeated collisions
+	F - UI.cs - Class for the UI:
+		F - Will contain a Panel for holding items that can be dropped into the GameSpace
+		F - Have editing objects existing on GameSpace in Main?
+		F - Or have Drag-able script on Cubes as well?
+	F - Make basic UI prefabs
+	F - Make Array-list of Current gameObjects on screen
+	F - make Spawn methods add object to current in game objects
+	- Make function to delete objects, and there spot in arrayList
+	- Receiver.cs - Receiver class that will catch lasers
+				  F - Will have field that increases if in contact with laser
+				  - destroys Lasers on Contact
+	- Make Dragging blocks snap to grid sections
+	- Let player edit existing block locations
+	- Limit number of blocks to be dragged onto GameSpace
+	- Restrict dragging when simulating
+	
+	
 	
 	
 	
