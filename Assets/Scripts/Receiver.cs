@@ -11,7 +11,7 @@ public class Receiver : MonoBehaviour {
 	void Start () {
         score = 0;
         completed = false;
-        required = 2;
+        required = Main.Instance.receiverRequirements;
 	}
 
     private void OnCollisionEnter(Collision col)
@@ -19,7 +19,7 @@ public class Receiver : MonoBehaviour {
         if (col.gameObject.GetComponent<Laser>())
         {
             score += 1;
-            if (score > required)
+            if (score == required)
             {
                 completed = true;
             }

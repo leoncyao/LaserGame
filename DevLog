@@ -51,14 +51,21 @@ Ideas for later
 	F - Make basic UI prefabs
 	F - Make Array-list of Current gameObjects on screen
 	F - make Spawn methods add object to current in game objects
-	- Make function to delete objects, and there spot in arrayList
-	- Receiver.cs - Receiver class that will catch lasers
+	F - Make function to delete objects, and there spot in arrayList
+	F - Receiver.cs - Receiver class that will catch lasers
 				  F - Will have field that increases if in contact with laser
-				  - destroys Lasers on Contact
-	- Make Dragging blocks snap to grid sections
-	- Let player edit existing block locations
+				  F - destroys Lasers on Contact
+	F - Make Dragging blocks snap to grid sections
+	
+02-11:
+	F - Let player edit existing block locations
+	F - Restrict dragging when simulating
+	F - Win Screen
+	- Level Select Screen
+	- Organize configurations into Level Class
 	- Limit number of blocks to be dragged onto GameSpace
-	- Restrict dragging when simulating
+	
+	
 	
 	
 	

@@ -9,13 +9,16 @@ public class UI : MonoBehaviour
     public static bool started;
     public static bool ended;
 
+    public GameObject winMenu;
+    public static UI Instance;
+
 
     void Start()
     {
         clicked = false;
         started = false;
         ended = false;
-
+        Instance = this;
     }
 
     public void startStop(Button button)
@@ -33,6 +36,12 @@ public class UI : MonoBehaviour
             clicked = false;
             ended = true;
         }
+    }
+
+    public void spawnWinMenu()
+    {
+        GameObject win = Instantiate(winMenu, this.transform);
+        
     }
 
 

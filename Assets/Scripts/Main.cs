@@ -6,21 +6,27 @@ public class Main : MonoBehaviour
 {
 
     // SCREENSIDELENGTH will decide the proportion of screen and all objects
-    private const float SCREENSIDELENGTH = 12f;
-    private const float LASERSPEED = 10f, TILE_SIZE = 1, TILE_OFFSET = 0.5f;
+    private const float SCREENSIDELENGTH = 7f;
+    private const float LASERSPEED = 5f, TILE_SIZE = 1, TILE_OFFSET = 0.5f;
 
     public Vector2 ballVelocity;
-    public static bool simulating;
+    public bool simulating;
+    public bool running;
     public static Main Instance;
 
     Vector2 startLoc, endLoc;
+    public int receiverRequirements;
     private Vector3 cameraPos = new Vector3(SCREENSIDELENGTH/2, SCREENSIDELENGTH/2, -SCREENSIDELENGTH);
-    public GameObject blockPrefab, ballPrefab, arrowPrefab, receiverPrefab;
+    public GameObject blockPrefab, ballPrefab, arrowPrefab, receiverPrefab, blockSprite;
     public GameObject mainLight;
+    public GameObject canvas;
     // Might have multiple receivers later
     public GameObject receiver1;
+
     // List of current game Objects created by PLAYER
     public ArrayList currentObjects;
+    // Current in game balls created in simulation
+    public ArrayList currentBalls;
 
     void Start()
     {
@@ -29,10 +35,13 @@ public class Main : MonoBehaviour
         mainLight.transform.position = cameraPos;
 
         simulating = false;
+        running = true;
         startLoc = new Vector2(0, 0);
-        endLoc = new Vector2(SCREENSIDELENGTH, 0);
+        endLoc = new Vector2(SCREENSIDELENGTH-1, 0);
+        receiverRequirements = 1;
 
-        ballVelocity = new Vector2(1, 1);
+
+        ballVelocity = new Vector2(1*LASERSPEED, 1*LASERSPEED);
         intialConfig();
         Instance = this;
 
@@ -42,6 +51,7 @@ public class Main : MonoBehaviour
         //TestPhysics();
         //TestReceiver();
         currentObjects = new ArrayList();
+        currentBalls = new ArrayList();
     }
 
     void intialConfig()
@@ -62,52 +72,65 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        DrawGrid();
-        // If I recieve the signal from start button to start simulation
-        if (UI.started)
+        if (running)
         {
-            UI.started = false;
-            startSimulation();
-            simulating = true; // might want to put this inside start simulation
-        }
-        if (simulating)
-        {
-            // If the receivers conditions are met
-            if (checkReciever())
+            DrawGrid();
+            // If I recieve the signal from start button to start simulation
+            if (UI.started)
             {
-                stopSimulation();
+                UI.started = false;
+                startSimulation();
+                simulating = true; // might want to put this inside start simulation
             }
-
-            // If i recieve the signal from end button to stop simulation
-            if (UI.ended)
+            if (simulating)
             {
-                UI.ended = false;
-                stopSimulation();
-                simulating = false;
+                // If the receivers conditions are met
+                if (checkReciever())
+                {
+                    stopSimulation();
+                    UI.Instance.spawnWinMenu();
+                    running = false;
+                }
+
+                // If i recieve the signal from end button to stop simulation
+                if (UI.ended)
+                {
+                    UI.ended = false;
+                    stopSimulation();
+                    simulating = false;
+                }
             }
         }
     }
 
     void startSimulation()
     {
-        //make laser spawn from start Location
+        //makes a laser spawn from start Location
         spawnLaser(startLoc);
     }
-
-    void stopSimulation()
+    void destroyAllObjects()
     {
         foreach (GameObject temp in currentObjects)
         {
             Destroy(temp);
         }
-        currentObjects = new ArrayList();
-
+        destroyAllBalls();
+    }
+    void destroyAllBalls()
+    {
+        foreach (GameObject temp in currentBalls)
+        {
+            Destroy(temp);
+        }
+        currentBalls = new ArrayList();
+    }
+    void stopSimulation()
+    {
+        destroyAllBalls();
     }
 
     bool checkReciever()
     {
-        //print("checking1 " + receiver1);
-        //print("checking2 " + receiver1.GetComponent<Receiver>()); 
         return receiver1.GetComponent<Receiver>().completed;
     }
     private void DrawGrid()
@@ -131,7 +154,6 @@ public class Main : MonoBehaviour
 
         }
     }
-
     public void spawnStartArrow(Vector2 loc)
     {
         // Spawns Arrow to indicate position and direction of spawned Lasers
@@ -145,10 +167,11 @@ public class Main : MonoBehaviour
         arrow.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
     }
 
-    public void spawnBlock(Vector2 position)
+    public GameObject spawnBlock(Vector2 position)
     {
         GameObject newBlock = Instantiate(blockPrefab, offSetVector(position), Quaternion.Euler(0, 0, 0));
         currentObjects.Add(newBlock);
+        return newBlock;
     }
 
     public void spawnLaser(Vector2 position)
@@ -156,7 +179,7 @@ public class Main : MonoBehaviour
         GameObject newBall = Instantiate(ballPrefab, offSetVector(position), Quaternion.identity);
         newBall.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         newBall.GetComponent<Laser>().startVelocity = ballVelocity;
-        currentObjects.Add(newBall);
+        currentBalls.Add(newBall);
 
     }
 
@@ -166,6 +189,20 @@ public class Main : MonoBehaviour
         receiver1 = Instantiate(receiverPrefab, offSetVector(position), Quaternion.Euler(0, 0, 0));
     }
 
+    public void spawnBlockSprite(Vector3 position)
+    {
+
+        GameObject tempSprite = Instantiate(blockSprite, Vector3.zero, Quaternion.identity);
+        tempSprite.transform.SetParent(canvas.transform);
+        Vector3 UIposition = Camera.main.WorldToScreenPoint(offSetVector(position));
+        tempSprite.transform.position = UIposition;
+        tempSprite.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        tempSprite.GetComponent<Draggable>().attachedBlock = spawnBlock(position);
+
+        currentObjects.Add(tempSprite);
+
+
+    }
     public void destroyObject(GameObject temp) 
     {
         Destroy(temp);
@@ -242,7 +279,6 @@ public class Main : MonoBehaviour
         spawnLaser(ballLoc);
 
     }
-
 
     public void TestReceiver()
     {

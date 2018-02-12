@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour {
-
-	// Use this for initialization
+    public GameObject blockSprite;
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //private void OnMouseDown()
+    //{
+    //    print("test");
+    //    //GameObject tempObject = Instantiate(blockSprite, transform);
+
+    //}
 }
