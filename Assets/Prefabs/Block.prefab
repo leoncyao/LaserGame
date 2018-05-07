@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33365542120715654}
   - component: {fileID: 65598973231232188}
   - component: {fileID: 23975614606675780}
-  - component: {fileID: 114897119996094310}
+  - component: {fileID: 114459530660483454}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1568458704871372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.289468, y: 3.8721504, z: 0.39066887}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,8 +56,9 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 83d6d43ed8d988c498b23ad07a16e382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114897119996094310
+--- !u!114 &114459530660483454
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,5 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e05338285724a48865bf4dbd1d66c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSprite: {fileID: 1101571547994568, guid: d10953c9b8401b6458c26333c8b938c8,
-    type: 2}
+  attachedSprite: {fileID: 0}
+  Editable: {fileID: 2100000, guid: 83d6d43ed8d988c498b23ad07a16e382, type: 2}
+  nonEditable: {fileID: 2100000, guid: 55136d0912e1770418abd119aaac6090, type: 2}

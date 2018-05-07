@@ -35,7 +35,7 @@ public class Tools : MonoBehaviour {
         //print("angle is " + Mathf.Rad2Deg*angle);
         if (dx > 0 && dy >= 0)
         {
-            angle = angle;
+            //angle = angle;
             //print("1rst quad");
         }
         else if (dx < 0 && dy > 0)

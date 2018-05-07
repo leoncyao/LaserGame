@@ -1,0 +1,153 @@
+LaserGame Project
+
+Preliminary Structure:
+	-Starts with initial configuration of Level:
+		-Will have a tube for spawning Lasers
+		-Receiver to catch Lasers
+		-Preset blocks for bouncing
+	-waits for user to edit GameSpace by either:
+		-dragging box from itemBar onto GameSpace
+		-moving existing items in GameSpace around with mouse
+		-Blocks will be fixed to grid, and will snap to integer grid locations when being dragged (x, y) x,y being Integers.
+	-if user hits play:
+		-restrict editing
+		-spawn Laser with constant velocity
+		-start simulating according to physics laws:
+			- Lasers bounce elastically from blocks
+		-have a time variable at point? or reset time to 0?
+		-if the laser fulfills receiver requirements
+			-stop simulation
+		-if user hits stop:
+			-destroy any in game lasers
+			-reset to initial configuration excluding items that the user has edited
+	-If receiver fulfills expectation	
+		-player wins
+
+Themes to keep in mind:
+	- Test based design - design tests for methods first before you design the method itself.
+	- Make PC to mobile version easy to convert - do not rely on PC specific design
+
+Ideas for later
+	- Percent counter above receiver that shows how much laser still needs to go into the receiver
+	- receiver only catches from one side
+
+02-10:
+	F - First commit initial set up to repository 
+	F - Work on getting basic class structures defined:
+	F - Main.cs - A runner Class that has the main game loop in its update():
+	F - Fix ScreenLength and ScreenSize
+	F - Draw Grid for visualization
+	F - Spawning methods for block, Laser
+	F - Block.cs - Basic block Class that will interact with lasers. 
+	F - Laser.cs - Laser Class. Lasers bounce of blocks elastically
+		F - Make prefabs for Laser, Block:
+		F - Laser will be represented by a single ball
+	F - Create tests for bouncing lasers
+	F - Add timer to stop repeated collisions
+	F - UI.cs - Class for the UI:
+		F - Will contain a Panel for holding items that can be dropped into the GameSpace
+		F - Have editing objects existing on GameSpace in Main?
+		F - Or have Drag-able script on Cubes as well?
+	F - Make basic UI prefabs
+	F - Make Array-list of Current gameObjects on screen
+	F - make Spawn methods add object to current in game objects
+	F - Make function to delete objects, and there spot in arrayList
+	F - Receiver.cs - Receiver class that will catch lasers
+				  F - Will have field that increases if in contact with laser
+				  F - destroys Lasers on Contact
+	F - Make Dragging blocks snap to grid sections
+	
+02-11:
+	F - Let player edit existing block locations
+	F - Restrict dragging when simulating
+	F - Win Screen
+	
+02-12:
+	F - Edit local scale off 
+	F - Make sure scaling works with block and image local Scales
+	 - Level Select Screen:
+		 - Level Select Title
+		 - Buttons to go between levels	
+	- Organize configurations into Level Class
+	- Limit number of blocks to be dragged onto GameSpace
+	- Redesign a draggableBlockclass
+	- Add triangular block class:
+		- Inherits from draggableClass
+		- On drag, rotates 90 degrees around center of hypotenuse
+
+02-18:
+	F - Set everything to resolution 1080 - 768
+	F - Make Lines into 1 object
+	F - Level Select Screen:
+		- Level Select Title
+		- Buttons to go between levels
+		
+	- Organize configurations into Level Class
+	- Limit number of blocks to be dragged onto GameSpace
+	- Redesign a draggableBlockclass
+	- Add triangular block class:
+		- Inherits from draggableClass
+		- On drag, rotates 90 degrees around center of hypotenuse
+		
+02-22
+	F - Set everything to resolution 1080 - 768
+	F - Make Lines into 1 object 
+	F - Level Select Screen:
+	F 	- Level Select Title
+	F 	- Buttons to go between levels
+	
+02-23
+	F - Limit number of blocks to be dragged onto GameSpace
+	F - Redesign a draggableBlockclass
+	- Add triangular block class:
+		F - Inherits from draggableClass
+		F - On drag, if end position is same start, rotates 90 degrees around center of hypotenuse
+02-24	
+	- Clean up code:
+		- Main
+		- Laser
+	F - Make triangle rotation based on grid square size
+	F - ALSO JUST REALIZED JUST DO TRIANGLE ROT WITH ONCLICK INSTEAD OF SPAWNING AGAINNNNNNNNNN
+	F - Make tests for TriangleBlock physics
+	F - Organize configurations into Level Class
+	F - Redesign levels 1, 2, 3
+	- make delete button for blocks
+	- Save code by making spawnObjects into 1 function
+02-25
+	- Clean up code:
+		- Main
+		- Laser
+	- make delete button for blocks
+	- make return to main menu button
+	- Save code by making spawnObjects into 1 function
+	-	Fix bug where rotation angle doesnt sync up when rotating:
+		- not sure if done
+	- make collision timers part of ball, not of block, so multiple balls can bounce off at the same time
+02-27
+	- make block, triangular block icons scale properly (if possible)
+	- Clean up code:
+		- Main
+		- Laser
+	- make delete button for blocks
+	- make return to main menu button
+	- Save code by making spawnObjects into 1 function
+	-	Fix bug where rotation angle doesnt sync up when rotating:
+		- not sure if done
+	- make collision timers part of ball, not of block, so multiple balls can bounce off at the same time
+03-04
+	F - make block, triangular block icons scale properly (if possible)
+	F - make different colors for editable and non-editable blocks
+	- make collision timers part of ball, not of block, so multiple balls can bounce off at the same time
+	- make delete button for blocks
+	- make return to main menu button
+	- Clean up code:
+		- Main
+		- Laser
+	- Save code by making spawnObjects into 1 function
+	-	Fix bug where rotation angle doesn't sync up when rotating:
+		- not sure if done
+
+	
+	
+	
+	
